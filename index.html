@@ -16,6 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
      <!-- tailwind css cdn -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
 
     <script>
         tailwind.config = {
@@ -120,7 +121,8 @@
         <p class="text-center text-sm md:text-base font-normal mb-12">Adopt your best friend and create unforgettable memories together.</p>
 
         <!-- Animal-container -->
-         <div id="animal-container" class="flex gap-8 justify-between items-center border border-red-500">
+         <div id="animal-container" class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-8 lg:gap-20 justify-between items-center border border-red-500">
+          
           
          </div>
 
@@ -143,19 +145,18 @@
          <!-- Animal Content............. -->
           <div id="animal-details-container" class="flex justify-between gap-2 lg:gap-4" >
             <!-- left.............................. -->
-             <!-- <div id="data-container"  class="w-[74%] h-full border border-red-300 ">
+             <div id="data-container"  class="w-[74%] h-full border border-red-300 ">
                <div id="animal-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-min gap-2 lg:gap-4 ">
 
                </div>
-             </div> -->
+             </div>
 
              <!-- right..................................... -->
-              <!-- <div class="w-[25%]  p-5 border border-[#1313131A] rounded-xl">
-
+              <div class="w-[25%]  p-5 border border-[#1313131A] rounded-xl">
                 <div id="img-container" class="grid grid-cols-1 md:grid-cols-2 grid-row-min gap-2 lg:gap-4">
                  
                 </div>
-              </div> -->
+              </div>
 
           </div>
     

@@ -1,3 +1,193 @@
+
+const loadingSpin = () =>{
+    const loading = document.getElementById('loading');
+    // const dataContainer = document.getElementById('data-container');
+    const dataContainer = document.getElementById('animal-details-container');
+    
+    loading.classList.remove('hidden');
+    loading.classList.add('block');
+    dataContainer.classList.add('hidden');
+    
+    setTimeout(function() {
+        loading.classList.add('hidden');
+        loading.classList.remove('block');
+        dataContainer.classList.remove('hidden');
+    
+    }, 2000);
+    return 
+}
+
+// ......................................................
+const removeActiveClass = () =>{
+    const btns = document.getElementsByClassName("category-btn");
+    for(let b of btns){
+        b.parentElement.classList.remove("active");
+        b.parentElement.classList.add("rounded-2xl",'border','border-[#0E7A8126]');
+    }
+
+}
+
+// loadCategory................................................
+const loadCategoryCardBasedOnId = (id , categoryName) =>{
+
+    removeActiveClass();
+    const activeBtn = document.getElementById(`btn-${id}`);
+    activeBtn.parentElement.classList.add("active");
+    activeBtn.parentElement.classList.remove("rounded-2xl",'border','border-[#0E7A8126]');
+
+    loadingSpin();
+
+
+    fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
+    .then((res) => res.json())
+    .then((data) => {
+       displayCategoriesData(data.data);
+    })
+    .catch((err) => console.log(err));
+}
+
+// ..................Load All Data(Card).......................................
+const loadAllData = () =>{
+    loadingSpin();
+//   console.log('loading done');
+    fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
+    .then((res) => res.json())
+    .then((data) => displayCategoriesData(data.pets))
+    .catch((err) => console.log(err));
+}
+
+// ........................displayCard..............................................
+const displayCategoriesData = (data) =>{
+    // console.log(data);
+    const animalContainer = document.getElementById('animal-content');
+    console.log(animalContainer);
+    animalContainer.innerHTML= "";
+
+    const sortButton = document.getElementById('sort-by-price');
+    if(data.length === 0){
+        animalContainer.classList.remove("grid");
+        animalContainer.parentElement.classList.add('bg-[#13131308]','rounded-3xl','flex', 'justify-center', 'items-center','h-auto');
+        animalContainer.innerHTML = `
+        <div class="w-[80%] mx-auto flex flex-col justify-center items-center bg-red-200">
+            <img class="mb-3"
+                src="./images/error.webp"
+                alt="img" />
+            <h2 class="text-3xl font-bold mb-3">No Information Available</h2>
+            <p class="text-base font-normal text-[#131313B3] text-center">At this moment, there is no information available regarding your query; we appreciate your understanding and patience in this matter.</p>
+        </div>`;
+        
+        // extra...
+        //  sortButton.disabled = true;
+        //  sortButton.classList.add('bg-gray-200');
+        
+        return;
+    }
+    else{
+        // sortButton.disabled = false;
+        // sortButton.classList.remove('bg-gray-200');
+
+        animalContainer.classList.add("grid");
+        animalContainer.parentElement.classList.remove('bg-[#13131308]','rounded-3xl','flex', 'justify-center', 'items-center','h-screen');
+    }
+    let i = 1;
+    data.forEach(element => {
+        console.log(element);
+        const card = document.createElement("div");
+        card.classList = "card card-compact";
+        card.classList.add('border', 'border-[#1313131A]','rounded-xl', 'p-5');
+
+        card.innerHTML = 
+        `
+        <figure class= "h-[160px] mb-6">
+            <img class="h-full w-full object-cover rounded-lg"
+            src=${element.image}
+            alt="img" /> 
+        </figure>
+
+        <div class="px-0 w-[90%] mb-2">
+            <h2 class="font-bold text-xl text-[#131313] mb-2">${element.pet_name}</h2>
+
+            <div class="flex items-center gap-1 mb-2 h-5">
+
+                <div class = "h-4 flex items-center">
+                    <img class="h-full object-contain" src="https://img.icons8.com/?size=24&id=kskqOgaMPJTm&format=png"/>
+                </div>
+                <div class = "h-4 flex items-center">
+                    <h3 class="h-full font-normal text-base text-[#131313B3] mb-2">Breed: ${element.breed? element.breed : 'Not Found'}</h3>
+                </div>
+            </div> 
+
+             <div class="flex items-center gap-1 mb-2 h-5">
+                <div class = "h-4 flex items-center">
+                    <img class="h-full object-contain" src="https://img.icons8.com/?size=16&id=e6uFgdVTiU4v&format=png"/>
+                </div>
+                <div class = "h-4 flex items-center">
+                    <h3 class="h-full font-normal text-base text-[#131313B3] mb-2">Birth: ${element.date_of_birth? element.date_of_birth.split('-')[0] : 'Not Available' }</h3>
+                </div>
+            </div> 
+
+            <div class="flex items-center gap-1 mb-2 h-5">
+                <div class = "h-4 flex items-center">
+                    <img class="h-full object-contain" src="https://img.icons8.com/?size=30&id=77882&format=png"/>
+                </div>
+                <div class = "h-4 flex items-center">
+                    <h3 class="h-full font-normal text-base text-[#131313B3] mb-2">Gender: ${element.gender? element.gender : 'Not Found'}</h3>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-1 mb-2 h-5">
+                <div class = "h-4 flex items-center">
+                    <img class="h-full object-contain" src="https://img.icons8.com/?size=24&id=89392&format=png"/>
+                </div>
+                <div class = "h-4 flex items-center">
+                    <h3 class="h-full font-normal text-base text-[#131313B3] mb-2">Price: ${element.price? element.price+'$' : 'Not Available'}</h3>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+
+        <div class="flex justify-between items-center gap-1 my-2 h-5 mt-5">
+             <div class = "hover:bg-[#0E7A81] h-full flex items-center border border-[#0E7A8126] rounded-lg px-4 py-5  ">
+                 <button class="hover:bg-[#0E7A81] hover:text-white flex justify-center items-center"><img class="h-full object-contain" src="https://img.icons8.com/?size=24&id=u8MTpAq972MG&format=png"/></button>
+            </div>
+            <div class ="hover:bg-[#0E7A81] flex items-center border border-[#0E7A8126] rounded-lg px-3 py-2 ">
+                 <button id='adopt-${i}' class="flex justify-center items-center hover:text-white text-[#0E7A81] text-base font-bold ">Adopt</button>
+            </div>
+             <div class ="hover:bg-[#0E7A81] flex items-center border border-[#0E7A8126] rounded-lg px-3 py-2 ">
+                 <button class="hover:text-white flex justify-center items-center text-[#0E7A81] text-base font-bold">Details</button>
+            </div>
+        </div>    
+        `;
+        
+        animalContainer.appendChild(card);
+        i++;
+      
+    });
+
+    document.getElementById('sort-by-price').addEventListener('click', () => {
+        data.sort((a, b) => b.price - a.price); // Sort in descending order
+         // loading...........
+        const loading = document.getElementById('loading');
+        // const dataContainer = document.getElementById('data-container');
+        const dataContainer = document.getElementById('animal-details-container');
+        
+        loading.classList.remove('hidden');
+        loading.classList.add('block');
+        dataContainer.classList.add('hidden');
+        
+        setTimeout(function() {
+            loading.classList.add('hidden');
+            loading.classList.remove('block');
+            dataContainer.classList.remove('hidden');
+        
+        }, 2000);
+
+        displayCategoriesData(data); // Update the display
+    });
+
+}
+
 // Load All categories Data and creating btn based on category......................................
 const loadAllCategories = () =>{
     console.log("Load crated");
@@ -7,20 +197,19 @@ const loadAllCategories = () =>{
     .catch((err) => console.log(err));
 }
 
-
 const DisplayCategories = (categories) =>{
     console.log(categories);
     const categoryContainer = document.getElementById('animal-container');
 
     categories.forEach(element => {
         const btnContainer = document.createElement("div");
-        btnContainer.classList.add('w-full','rounded-2xl', 'border','border-[#0E7A8126]','flex','justify-center','items-center');
+        btnContainer.classList.add('w-full','rounded-2xl', 'border','border-[#0E7A8126]','grid','justify-center','items-center');
         btnContainer.id = 'category-btn-container';
 
         if(element.id === 4){ 
             btnContainer.innerHTML=
             `
-             <button id="btn-${element.id}"  class="p-3 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-3"><img src="https://img.icons8.com/?size=40&id=50533&format=png" alt="">
+             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')"  class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-3 h-8"><img class="h-full" src="https://img.icons8.com/?size=40&id=50533&format=png" alt="">
              </span>${element.category}s
              </button>
             `}
@@ -29,7 +218,7 @@ const DisplayCategories = (categories) =>{
             
             btnContainer.innerHTML=
             `
-             <button id="btn-${element.id}"  class="p-3 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-3"><img src="https://img.icons8.com/?size=48&id=20903&format=png" alt="">
+             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')"  class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-3 h-8"><img class="h-full" src="https://img.icons8.com/?size=48&id=20903&format=png" alt="">
              </span>${element.category}s
              </button>
             `}
@@ -37,14 +226,14 @@ const DisplayCategories = (categories) =>{
         else if(element.id === 3){ 
             btnContainer.innerHTML=
             `
-             <button id="btn-${element.id}"  class="p-3 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-4 h-4 w-4 lg:h-7 lg:w-7"><img class="w-full h-full" src="https://img.icons8.com/?size=80&id=zWQnJwqGetUQ&format=png" alt="">
+             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')" class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-4 h-7 w-7 md:h-8 md:w-7 lg:h-8 lg:w-8"><img class="w-full h-full" src="https://img.icons8.com/?size=80&id=zWQnJwqGetUQ&format=png" alt="">
              </span>${element.category}s
              </button>
             `}    
         else{
             btnContainer.innerHTML=
             `
-             <button id="btn-${element.id}" class="p-3 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-3"><img src="https://img.icons8.com/?size=48&id=ZGYXhUYK9ciX&format=png" alt="">
+             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')" class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-4 h-8"><img class="h-full" src="https://img.icons8.com/?size=48&id=ZGYXhUYK9ciX&format=png" alt="">
              </span>${element.category}s
              </button>
             `
@@ -63,3 +252,4 @@ const DisplayCategories = (categories) =>{
 }
 
 loadAllCategories();
+loadAllData();
