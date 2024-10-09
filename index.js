@@ -16,6 +16,16 @@ const loadingSpin = () =>{
     }, 2000);
     return 
 }
+const showImage = (image) => {
+    console.log(image);
+    const imageContainer = document.getElementById('img-container');
+    imageContainer.innerHTML += 
+    `
+         <div class=" h-auto md:h-[80px] lg:h-[124px] border border-[#1313131A] rounded-lg my-0 py-0">
+            <img class="w-full h-full object-cover rounded-lg" src="${image}" alt="">
+        </div>
+    `;
+}
 
 // ......................................................
 const removeActiveClass = () =>{
@@ -66,14 +76,14 @@ const displayCategoriesData = (data) =>{
     const sortButton = document.getElementById('sort-by-price');
     if(data.length === 0){
         animalContainer.classList.remove("grid");
-        animalContainer.parentElement.classList.add('bg-[#13131308]','rounded-3xl','flex', 'justify-center', 'items-center','h-auto');
+        animalContainer.parentElement.classList.add('bg-[#13131308]','rounded-3xl','flex','flex-col', 'justify-center', 'items-center','h-auto');
         animalContainer.innerHTML = `
-        <div class="w-[80%] mx-auto flex flex-col justify-center items-center bg-red-200">
+        <div class="w-[90%] mx-auto flex flex-col justify-center items-center my-8">
             <img class="mb-3"
                 src="./images/error.webp"
                 alt="img" />
-            <h2 class="text-3xl font-bold mb-3">No Information Available</h2>
-            <p class="text-base font-normal text-[#131313B3] text-center">At this moment, there is no information available regarding your query; we appreciate your understanding and patience in this matter.</p>
+            <h2 class="text-base md:text-2xl lg:text-3xl font-bold mb-3">No Information Available</h2>
+            <p class="text-xs md:text-sm lg:text-base w-full md:w-[80%] font-normal text-[#131313B3] text-center">At this moment, there is no information available regarding your query; we appreciate your understanding and patience in this matter.</p>
         </div>`;
         
         // extra...
@@ -94,53 +104,52 @@ const displayCategoriesData = (data) =>{
         console.log(element);
         const card = document.createElement("div");
         card.classList = "card card-compact";
-        card.classList.add('border', 'border-[#1313131A]','rounded-xl', 'p-5');
+        card.classList.add('border', 'border-[#1313131A]','rounded-xl', 'p-3');
 
         card.innerHTML = 
         `
-        <figure class= "h-[160px] mb-6">
+        <figure class= " h-auto md:h-[160px] mb-6">
             <img class="h-full w-full object-cover rounded-lg"
             src=${element.image}
             alt="img" /> 
         </figure>
 
-        <div class="px-0 w-[90%] mb-2">
-            <h2 class="font-bold text-xl text-[#131313] mb-2">${element.pet_name}</h2>
+        <div class="px-0 mb-2">
+            <h2 class="font-bold text-lg sm:text-2xl md:text-xl text-[#131313] mb-2">${element.pet_name}</h2>
 
-            <div class="flex items-center gap-1 mb-2 h-5">
-
-                <div class = "h-4 flex items-center">
+            <div class="flex items-center gap-1 mb-2 sm:mb-3 md:mb-2 h-5">
+                <div class = "h-3 sm:h-5 md:h-3 flex items-center">
                     <img class="h-full object-contain" src="https://img.icons8.com/?size=24&id=kskqOgaMPJTm&format=png"/>
                 </div>
-                <div class = "h-4 flex items-center">
-                    <h3 class="h-full font-normal text-base text-[#131313B3] mb-2">Breed: ${element.breed? element.breed : 'Not Found'}</h3>
+                <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                    <h3 class="h-full font-normal text-sm sm:text-lg md:text-sm text-[#131313B3] mb-2">Breed: ${element.breed? element.breed : 'Not Found'}</h3>
                 </div>
             </div> 
 
-             <div class="flex items-center gap-1 mb-2 h-5">
-                <div class = "h-4 flex items-center">
+             <div class="flex items-center gap-1 mb-2 sm:mb-3 md:mb-2 h-5">
+                <div class = "h-3 sm:h-5 md:h-3 flex items-center">
                     <img class="h-full object-contain" src="https://img.icons8.com/?size=16&id=e6uFgdVTiU4v&format=png"/>
                 </div>
-                <div class = "h-4 flex items-center">
-                    <h3 class="h-full font-normal text-base text-[#131313B3] mb-2">Birth: ${element.date_of_birth? element.date_of_birth.split('-')[0] : 'Not Available' }</h3>
+                <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                    <h3 class="h-full font-normal text-sm sm:text-lg md:text-sm text-[#131313B3] mb-2">Birth: ${element.date_of_birth? element.date_of_birth.split('-')[0] : 'Not Available' }</h3>
                 </div>
             </div> 
 
-            <div class="flex items-center gap-1 mb-2 h-5">
-                <div class = "h-4 flex items-center">
+            <div class="flex items-center gap-1 mb-2 sm:mb-3 md:mb-2 h-5">
+                <div class = "h-3 sm:h-5 md:h-3 flex items-center">
                     <img class="h-full object-contain" src="https://img.icons8.com/?size=30&id=77882&format=png"/>
                 </div>
-                <div class = "h-4 flex items-center">
-                    <h3 class="h-full font-normal text-base text-[#131313B3] mb-2">Gender: ${element.gender? element.gender : 'Not Found'}</h3>
+                <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                    <h3 class="h-full font-normal text-sm sm:text-lg md:text-sm text-[#131313B3] mb-2">Gender: ${element.gender? element.gender : 'Not Found'}</h3>
                 </div>
             </div>
 
-            <div class="flex items-center gap-1 mb-2 h-5">
-                <div class = "h-4 flex items-center">
+            <div class="flex items-center gap-1 mb-2 sm:mb-3 md:mb-2 h-5">
+                <div class = "h-3 sm:h-5 md:h-3 flex items-center">
                     <img class="h-full object-contain" src="https://img.icons8.com/?size=24&id=89392&format=png"/>
                 </div>
-                <div class = "h-4 flex items-center">
-                    <h3 class="h-full font-normal text-base text-[#131313B3] mb-2">Price: ${element.price? element.price+'$' : 'Not Available'}</h3>
+                <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                    <h3 class="h-full font-normal text-sm sm:text-lg md:text-sm text-[#131313B3] mb-2">Price: ${element.price? element.price+'$' : 'Not Available'}</h3>
                 </div>
             </div>
 
@@ -148,14 +157,14 @@ const displayCategoriesData = (data) =>{
         <hr>
 
         <div class="flex justify-between items-center gap-1 my-2 h-5 mt-5">
-             <div class = "hover:bg-[#0E7A81] h-full flex items-center border border-[#0E7A8126] rounded-lg px-4 py-5  ">
-                 <button class="hover:bg-[#0E7A81] hover:text-white flex justify-center items-center"><img class="h-full object-contain" src="https://img.icons8.com/?size=24&id=u8MTpAq972MG&format=png"/></button>
+             <div class = "hover:border-[#0E7A81] h-full flex items-center border border-[#0E7A8126] rounded-lg px-2 py-4 sm:px-6 sm:py-6 md:px-2 md:py-4 ">
+                 <button onclick="showImage('${element.image}')" class="flex justify-center items-center"><img class="h-full object-contain" src="https://img.icons8.com/?size=24&id=u8MTpAq972MG&format=png"/></button>
             </div>
-            <div class ="hover:bg-[#0E7A81] flex items-center border border-[#0E7A8126] rounded-lg px-3 py-2 ">
-                 <button id='adopt-${i}' class="flex justify-center items-center hover:text-white text-[#0E7A81] text-base font-bold ">Adopt</button>
+            <div class ="hover:bg-[#0E7A81] flex items-center border border-[#0E7A8126] rounded-lg px-2 py-1.5 sm:px-4 sm:py-2.5 md:px-2 md:py-1.5  ">
+                 <button id='adopt-${i}' class="flex justify-center items-center hover:text-white text-[#0E7A81] text-sm sm:text-xl md:text-sm font-bold ">Adopt</button>
             </div>
-             <div class ="hover:bg-[#0E7A81] flex items-center border border-[#0E7A8126] rounded-lg px-3 py-2 ">
-                 <button class="hover:text-white flex justify-center items-center text-[#0E7A81] text-base font-bold">Details</button>
+             <div class ="hover:bg-[#0E7A81] flex items-center border border-[#0E7A8126] rounded-lg px-2 py-1.5 sm:px-4 sm:py-2.5 md:px-2 md:py-1.5  ">
+                 <button class="hover:text-white flex justify-center items-center text-[#0E7A81] text-sm sm:text-xl md:text-sm font-bold">Details</button>
             </div>
         </div>    
         `;
@@ -168,20 +177,7 @@ const displayCategoriesData = (data) =>{
     document.getElementById('sort-by-price').addEventListener('click', () => {
         data.sort((a, b) => b.price - a.price); // Sort in descending order
          // loading...........
-        const loading = document.getElementById('loading');
-        // const dataContainer = document.getElementById('data-container');
-        const dataContainer = document.getElementById('animal-details-container');
-        
-        loading.classList.remove('hidden');
-        loading.classList.add('block');
-        dataContainer.classList.add('hidden');
-        
-        setTimeout(function() {
-            loading.classList.add('hidden');
-            loading.classList.remove('block');
-            dataContainer.classList.remove('hidden');
-        
-        }, 2000);
+         loadingSpin();
 
         displayCategoriesData(data); // Update the display
     });
