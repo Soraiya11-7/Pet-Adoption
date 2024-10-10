@@ -81,7 +81,7 @@ const displayDetails = (petData) =>{
                         <img class="h-full object-contain" src="https://img.icons8.com/?size=30&id=aY7opuTeQwTH&format=png"/>
                     </div>
                     <div class = "h-4 flex items-center">
-                        <h3 class="h-3 sm:h-5 md:h-3 font-normal text-sm sm:text-lg md:text-sm text-[#131313B3] mb-2">Vaccinated status: ${petData.vaccinated_status? petData.vaccinated_status.split('-')[0] : 'Not Available' }</h3>
+                        <h3 class="h-3 sm:h-5 md:h-3 font-normal text-sm sm:text-lg md:text-sm text-[#131313B3] mb-2">Vaccinated status: ${petData.vaccinated_status? petData.vaccinated_status : 'Not Available' }</h3>
                     </div>
                  </div> 
             </div>
@@ -247,7 +247,7 @@ const displayCategoriesData = (data) =>{
 
         card.innerHTML = 
         `
-        <figure class= " h-auto md:h-[160px] mb-6">
+        <figure class= " h-auto md:h-[180px] mb-6">
             <img class="h-full w-full object-cover rounded-lg"
             src=${element.image}
             alt="img" /> 
