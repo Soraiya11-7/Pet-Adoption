@@ -40,7 +40,7 @@
 <body class="font-lato">
       <header class="mb-24 container mx-auto ">
         <div class=" bg-gradient-to-t from-white to-transparent">
-            <div class="container w-[90%] mx-auto mt-14 lg:pt-12 ">
+            <div class="container w-[95%] sm:w-[90%] mx-auto mt-14 lg:pt-12 ">
               <!-- navbar................................ -->
               <nav class="mb-14 lg:mb-14 w-full ml-0">
                 <div class="navbar -space-x-32  p-0">
@@ -116,7 +116,7 @@
     
     </header>
     <main id="main" class="container mx-auto mb-8">
-      <div class="container w-[90%] mx-auto border border-red-500">
+      <div class="container w-[95%] sm:w-[90%] mx-auto border border-red-500">
         <h1 class="text-xl md:text-3xl lg:text-4xl font-black text-center mb-6">Adopt Your Best Friend</h1>
         <p class="text-center text-sm md:text-base font-normal mb-12">Adopt your best friend and create unforgettable memories together.</p>
 
@@ -164,8 +164,22 @@
     
 
     </main>
+
+    <!-- Modal -->
+     <!-- Open the modal using ID.showModal() method -->
+     <button id="countDownModal" class="btn hidden" onclick="displayCountDownModal()">open modal</button>
+     <dialog id="my_modal_1" class="modal text-center mx-0 px-0 py-0">
+     <div class="modal-box px-0 max-w-sm flex flex-col justify-center items-center">
+         <img class="mb-2" src="https://img.icons8.com/?size=48&id=q6BlPrJZmxHV&format=png" alt="">
+         <h1 class="text-lg sm:text-2xl font-extrabold my-3">Congrats</h1>
+         <h3 class="text-sm md:text-lg font-bold">Adoption process is Start for your pet</h3>
+
+         <p id ="count-down" class="py-4 text-3xl md:text-4xl font-extrabold"></p>
+     </div>
+     </dialog>
+
     <footer class="container bg-[#131313] py-24 mx-auto">
-      <div class="w-[90%] mx-auto md:flex justify-between text-white ">
+      <div class="w-[95%] sm:w-[90%] mx-auto md:flex justify-between text-white ">
         <!-- left........................... -->
         <div class="left mb-8 md:mb-0">
           <div class="flex items-center gap-x-2 mb-6">

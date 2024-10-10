@@ -37,6 +37,48 @@ const removeActiveClass = () =>{
 
 }
 
+// countDown Modal....................................
+const displayCountDownModal = (adoptBtn) =>{
+
+    const countDownContainer = document.getElementById("countDownModal");
+    countDownContainer.classList.remove('hidden');
+    countDownContainer.classList.add('block');
+
+    const countdownElement = document.getElementById('count-down');
+    let countDownValue = 3;
+    countdownElement.innerText = countDownValue;
+  
+    const modalElement = document.getElementById("my_modal_1");
+    if (modalElement && typeof modalElement.showModal === 'function') {
+        modalElement.showModal(); 
+    }
+     const disableBtn = document.getElementById(`adopt-${adoptBtn}`);
+     
+    const countdownInterval = setInterval(() => {
+        countDownValue--;
+       
+        if (countDownValue > 0) {
+            countdownElement.innerText = countDownValue;  
+        }
+        // Close the modal and stop the countdown 
+        if (countDownValue === 0) {
+            // clearInterval(countdownInterval);
+            countDownContainer.classList.add('hidden');
+            countDownContainer.classList.remove('block');
+            if (modalElement && typeof modalElement.close === 'function') {
+                 modalElement.close();
+                }     
+                disableBtn.disabled = true;
+                disableBtn.innerText = 'Adopted';
+                disableBtn.classList.remove('text-[#0E7A81]');
+                disableBtn.classList.add('text-white')
+                disableBtn.parentElement.classList.remove('hover:bg-[#0E7A81]');
+                disableBtn.parentElement.classList.add('bg-gray-400');     
+        }
+    }, 1000); 
+    
+}
+
 // loadCategory................................................
 const loadCategoryCardBasedOnId = (id , categoryName) =>{
 
@@ -161,7 +203,7 @@ const displayCategoriesData = (data) =>{
                  <button onclick="showImage('${element.image}')" class="flex justify-center items-center"><img class="h-full object-contain" src="https://img.icons8.com/?size=24&id=u8MTpAq972MG&format=png"/></button>
             </div>
             <div class ="hover:bg-[#0E7A81] flex items-center border border-[#0E7A8126] rounded-lg px-2 py-1.5 sm:px-4 sm:py-2.5 md:px-2 md:py-1.5  ">
-                 <button id='adopt-${i}' class="flex justify-center items-center hover:text-white text-[#0E7A81] text-sm sm:text-xl md:text-sm font-bold ">Adopt</button>
+                 <button id='adopt-${i}' onclick="displayCountDownModal(${i})" class="flex justify-center items-center hover:text-white text-[#0E7A81] text-sm sm:text-xl md:text-sm font-bold ">Adopt</button>
             </div>
              <div class ="hover:bg-[#0E7A81] flex items-center border border-[#0E7A8126] rounded-lg px-2 py-1.5 sm:px-4 sm:py-2.5 md:px-2 md:py-1.5  ">
                  <button class="hover:text-white flex justify-center items-center text-[#0E7A81] text-sm sm:text-xl md:text-sm font-bold">Details</button>
