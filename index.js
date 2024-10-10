@@ -17,14 +17,112 @@ const loadingSpin = () =>{
     return 
 }
 const showImage = (image) => {
-    console.log(image);
+    // console.log(image);
+    // md:h-[80px] lg:h-[130px]
     const imageContainer = document.getElementById('img-container');
     imageContainer.innerHTML += 
     `
-         <div class=" h-auto md:h-[80px] lg:h-[124px] border border-[#1313131A] rounded-lg my-0 py-0">
+         <div class="h-auto md:max-h[180px] border border-[#1313131A] rounded-lg my-0 py-0">
             <img class="w-full h-full object-cover rounded-lg" src="${image}" alt="">
         </div>
     `;
+}
+
+// loadDetails.......................................
+const loadDetails = async (petId) =>{
+    console.log(petId);
+    const url = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayDetails(data.petData);
+
+}
+const displayDetails = (petData) =>{
+
+    const detailContainer = document.getElementById("modal-content");
+    const sentenceArray = petData.pet_details.split(". ");
+    const firstSentence = sentenceArray[0] + ".";
+
+    const remainingSentences = sentenceArray.slice(1).map(s => {
+        let tSentence = s.trim();
+        return tSentence.endsWith('.') ? tSentence : tSentence + '.';
+    });
+
+    detailContainer.innerHTML= 
+    `
+    <img class="h-full w-full object-cover"
+            src=${petData.image}
+            alt="img" />
+     
+            <h2 class="font-bold text-xl text-[#131313] mb-2 mt-4">${petData.pet_name}</h2>
+        <div class="px-0 w-[90%] mb-2 flex flex-col sm:flex-row justify-start gap-2 sm:gap-8">
+        
+            <div>
+                <div class="flex items-center gap-1 mb-2 h-5">
+                    <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                        <img class="h-full object-contain" src="https://img.icons8.com/?size=24&id=kskqOgaMPJTm&format=png"/>
+                    </div>
+                    <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                        <h3 class="h-full font-normal text-sm sm:text-lg md:text-sm text-[#131313B3] mb-2">Breed: ${petData.breed? petData.breed : 'Not Found'}</h3>
+                    </div>
+                </div> 
+
+                <div class="flex items-center gap-1 mb-2 h-5">
+                    <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                        <img class="h-full object-contain" src="https://img.icons8.com/?size=30&id=77882&format=png"/>
+                    </div>
+                    <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                        <h3 class="h-full font-normal text-sm sm:text-lg md:text-sm text-[#131313B3] mb-2">Gender: ${petData.gender? petData.gender : 'Not Found'}</h3>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-1 mb-2 h-5">
+                    <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                        <img class="h-full object-contain" src="https://img.icons8.com/?size=30&id=aY7opuTeQwTH&format=png"/>
+                    </div>
+                    <div class = "h-4 flex items-center">
+                        <h3 class="h-3 sm:h-5 md:h-3 font-normal text-sm sm:text-lg md:text-sm text-[#131313B3] mb-2">Vaccinated status: ${petData.vaccinated_status? petData.vaccinated_status.split('-')[0] : 'Not Available' }</h3>
+                    </div>
+                 </div> 
+            </div>
+
+
+            <div>
+                <div class="flex items-center gap-1 mb-2 h-5">
+                    <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                        <img class="h-full object-contain" src="https://img.icons8.com/?size=16&id=e6uFgdVTiU4v&format=png"/>
+                    </div>
+                    <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                        <h3 class="h-full font-normal text-sm sm:text-lg md:text-sm text-[#131313B3] mb-2">Birth: ${petData.date_of_birth? petData.date_of_birth.split('-')[0] : 'Not Available' }</h3>
+                    </div>
+               </div> 
+
+            
+
+               <div class="flex items-center gap-1 mb-2 h-5">
+                    <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                        <img class="h-full object-contain" src="https://img.icons8.com/?size=24&id=89392&format=png"/>
+                    </div>
+                    <div class = "h-3 sm:h-5 md:h-3 flex items-center">
+                        <h3 class="h-full font-normal text-sm sm:text-lg md:text-sm text-[#131313B3] mb-2">Price: ${petData.price? petData.price+'$' : 'Not Available'}</h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+     <hr>       
+     <h3 class="text-lg font-semibold mt-4 mb-1.5 md:mb-3">Details Information</h3>       
+     <p class="py-3 text-sm md:text-base">${firstSentence}</p>       
+    `;
+//   let innerData = ``;
+    if (remainingSentences.length > 0) {
+        detailContainer.innerHTML += '<ul class="pl-5 w-[70%] mx-auto">';
+        remainingSentences.forEach(sentence => {
+            detailContainer.innerHTML += `<li class="text-sm md:text-base mb-0.5">${sentence}</li>`;
+        });
+        detailContainer.innerHTML += '</ul>';
+    }
+    document.getElementById("detailsModal").showModal();
 }
 
 // ......................................................
@@ -88,7 +186,6 @@ const loadCategoryCardBasedOnId = (id , categoryName) =>{
     activeBtn.parentElement.classList.remove("rounded-2xl",'border','border-[#0E7A8126]');
 
     loadingSpin();
-
 
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
     .then((res) => res.json())
@@ -206,7 +303,7 @@ const displayCategoriesData = (data) =>{
                  <button id='adopt-${i}' onclick="displayCountDownModal(${i})" class="flex justify-center items-center hover:text-white text-[#0E7A81] text-sm sm:text-xl md:text-sm font-bold ">Adopt</button>
             </div>
              <div class ="hover:bg-[#0E7A81] flex items-center border border-[#0E7A8126] rounded-lg px-2 py-1.5 sm:px-4 sm:py-2.5 md:px-2 md:py-1.5  ">
-                 <button class="hover:text-white flex justify-center items-center text-[#0E7A81] text-sm sm:text-xl md:text-sm font-bold">Details</button>
+                 <button onclick="loadDetails('${element.petId}')" class="hover:text-white flex justify-center items-center text-[#0E7A81] text-sm sm:text-xl md:text-sm font-bold">Details</button>
             </div>
         </div>    
         `;
