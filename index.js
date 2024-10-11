@@ -226,15 +226,15 @@ const displayCategoriesData = (data) =>{
             <p class="text-xs md:text-sm lg:text-base w-full md:w-[80%] font-normal text-[#131313B3] text-center">At this moment, there is no information available regarding your query; we appreciate your understanding and patience in this matter.</p>
         </div>`;
         
-        // extra...
-        //  sortButton.disabled = true;
-        //  sortButton.classList.add('bg-gray-200');
+       
+         sortButton.disabled = true;
+         sortButton.classList.add('bg-gray-200');
         
         return;
     }
     else{
-        // sortButton.disabled = false;
-        // sortButton.classList.remove('bg-gray-200');
+        sortButton.disabled = false;
+        sortButton.classList.remove('bg-gray-200');
 
         animalContainer.classList.add("grid");
         animalContainer.parentElement.classList.remove('bg-[#13131308]','rounded-3xl','flex', 'justify-center', 'items-center','h-screen');
