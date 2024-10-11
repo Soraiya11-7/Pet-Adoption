@@ -30,7 +30,6 @@ const showImage = (image) => {
 
 // loadDetails.......................................
 const loadDetails = async (petId) =>{
-    console.log(petId);
     const url = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`;
     const res = await fetch(url);
     const data = await res.json();
@@ -41,12 +40,14 @@ const displayDetails = (petData) =>{
 
     const detailContainer = document.getElementById("modal-content");
     const sentenceArray = petData.pet_details.split(". ");
-    const firstSentence = sentenceArray[0] + ".";
+    // const firstSentence = sentenceArray[0] + ".";
 
-    const remainingSentences = sentenceArray.slice(1).map(s => {
-        let tSentence = s.trim();
-        return tSentence.endsWith('.') ? tSentence : tSentence + '.';
-    });
+    const [firstSentence, ...remainingSentences] = sentenceArray;
+
+    // const remainingSentences = sentenceArray.slice(1).map(s => {
+    //     let tSentence = s.trim();
+    //     return tSentence.endsWith('.') ? tSentence : tSentence + '.';
+    // });
 
     detailContainer.innerHTML= 
     `
@@ -54,7 +55,7 @@ const displayDetails = (petData) =>{
             src=${petData.image}
             alt="img" />
      
-            <h2 class="font-bold text-xl text-[#131313] mb-2 mt-4">${petData.pet_name}</h2>
+            <h2 class="font-bold text-xl text-[#131313] mb-2 mt-4 font-inter">${petData.pet_name? petData.pet_name : 'Not Found'}</h2>
         <div class="px-0 w-[90%] mb-2 flex flex-col sm:flex-row justify-start gap-2 sm:gap-8">
         
             <div>
@@ -111,14 +112,14 @@ const displayDetails = (petData) =>{
             </div>
         </div>
      <hr>       
-     <h3 class="text-lg font-semibold mt-4 mb-1.5 md:mb-3">Details Information</h3>       
-     <p class="py-3 text-sm md:text-base">${firstSentence}</p>       
+     <h3 class="text-lg font-semibold mt-4 mb-1.5 md:mb-3 font-inter">Details Information</h3>       
+     <p class="py-3 text-sm md:text-base font-inter">${firstSentence}.</p>       
     `;
 //   let innerData = ``;
     if (remainingSentences.length > 0) {
-        detailContainer.innerHTML += '<ul class="pl-5 w-[70%] mx-auto">';
+        detailContainer.innerHTML += '<ul class="pl-5 w-[70%] mx-auto ">';
         remainingSentences.forEach(sentence => {
-            detailContainer.innerHTML += `<li class="text-sm md:text-base mb-0.5">${sentence}</li>`;
+            detailContainer.innerHTML += `<li class="text-sm md:text-base mb-0.5 font-inter">${sentence.endsWith('.') ? sentence : sentence + '.'}</li>`;
         });
         detailContainer.innerHTML += '</ul>';
     }
@@ -209,7 +210,7 @@ const loadAllData = () =>{
 const displayCategoriesData = (data) =>{
     // console.log(data);
     const animalContainer = document.getElementById('animal-content');
-    console.log(animalContainer);
+    // console.log(animalContainer);
     animalContainer.innerHTML= "";
 
     const sortButton = document.getElementById('sort-by-price');
@@ -221,7 +222,7 @@ const displayCategoriesData = (data) =>{
             <img class="mb-3"
                 src="./images/error.webp"
                 alt="img" />
-            <h2 class="text-base md:text-2xl lg:text-3xl font-bold mb-3">No Information Available</h2>
+            <h2 class="text-base md:text-2xl lg:text-3xl font-bold mb-3 font-inter">No Information Available</h2>
             <p class="text-xs md:text-sm lg:text-base w-full md:w-[80%] font-normal text-[#131313B3] text-center">At this moment, there is no information available regarding your query; we appreciate your understanding and patience in this matter.</p>
         </div>`;
         
@@ -240,7 +241,6 @@ const displayCategoriesData = (data) =>{
     }
     let i = 1;
     data.forEach(element => {
-        console.log(element);
         const card = document.createElement("div");
         card.classList = "card card-compact";
         card.classList.add('border', 'border-[#1313131A]','rounded-xl', 'p-3');
@@ -254,7 +254,7 @@ const displayCategoriesData = (data) =>{
         </figure>
 
         <div class="px-0 mb-2">
-            <h2 class="font-bold text-lg sm:text-2xl md:text-xl text-[#131313] mb-2">${element.pet_name}</h2>
+            <h2 class="font-bold text-lg sm:text-2xl md:text-xl text-[#131313] mb-2 font-inter">${element.pet_name? element.pet_name : 'Not Found'}</h2>
 
             <div class="flex items-center gap-1 mb-2 sm:mb-3 md:mb-2 h-5">
                 <div class = "h-3 sm:h-5 md:h-3 flex items-center">
@@ -318,7 +318,7 @@ const displayCategoriesData = (data) =>{
          // loading...........
          loadingSpin();
 
-        displayCategoriesData(data); // Update the display
+        displayCategoriesData(data); 
     });
 
 }
@@ -333,7 +333,7 @@ const loadAllCategories = () =>{
 }
 
 const DisplayCategories = (categories) =>{
-    console.log(categories);
+    // console.log(categories);
     const categoryContainer = document.getElementById('animal-container');
 
     categories.forEach(element => {
@@ -344,7 +344,7 @@ const DisplayCategories = (categories) =>{
         if(element.id === 4){ 
             btnContainer.innerHTML=
             `
-             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')"  class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-3 h-8"><img class="h-full" src="https://img.icons8.com/?size=40&id=50533&format=png" alt="">
+             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')"  class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center font-inter"><span class="mx-3 h-8"><img class="h-full" src="https://img.icons8.com/?size=40&id=50533&format=png" alt="">
              </span>${element.category}s
              </button>
             `}
@@ -353,7 +353,7 @@ const DisplayCategories = (categories) =>{
             
             btnContainer.innerHTML=
             `
-             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')"  class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-3 h-8"><img class="h-full" src="https://img.icons8.com/?size=48&id=20903&format=png" alt="">
+             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')"  class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center font-inter"><span class="mx-3 h-8"><img class="h-full" src="https://img.icons8.com/?size=48&id=20903&format=png" alt="">
              </span>${element.category}s
              </button>
             `}
@@ -361,14 +361,14 @@ const DisplayCategories = (categories) =>{
         else if(element.id === 3){ 
             btnContainer.innerHTML=
             `
-             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')" class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-4 h-7 w-7 md:h-8 md:w-7 lg:h-8 lg:w-8"><img class="w-full h-full" src="https://img.icons8.com/?size=80&id=zWQnJwqGetUQ&format=png" alt="">
+             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')" class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center font-inter"><span class="mx-4 h-7 w-7 md:h-8 md:w-7 lg:h-8 lg:w-8"><img class="w-full h-full" src="https://img.icons8.com/?size=80&id=zWQnJwqGetUQ&format=png" alt="">
              </span>${element.category}s
              </button>
             `}    
         else{
             btnContainer.innerHTML=
             `
-             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')" class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center"><span class="mx-4 h-8"><img class="h-full" src="https://img.icons8.com/?size=48&id=ZGYXhUYK9ciX&format=png" alt="">
+             <button id="btn-${element.id}" onclick="loadCategoryCardBasedOnId(${element.id} ,'${element.category}')" class="px-3 py-4 font-bold text-base md:text-lg lg:text-xl category-btn flex justify-center items-center font-inter"><span class="mx-4 h-8"><img class="h-full" src="https://img.icons8.com/?size=48&id=ZGYXhUYK9ciX&format=png" alt="">
              </span>${element.category}s
              </button>
             `

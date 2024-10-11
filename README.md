@@ -25,13 +25,22 @@ The Pet Adoption Platform is a web application designed to help users find pets 
 
 - **Responsive Design**: The web application is fully responsive, ensuring a smooth experience on desktop, tablet, and mobile devices.
 
+
 ## **ES6 Features Used**
 
-- **Arrow Functions**: 
-   - The code uses arrow functions for concise function expressions, such as `const loadingSpin = () => {...}` and `const showImage = (image) => {...}`. Arrow functions allow for shorter syntax and lexically bind the `this` value.
+- **Arrow Functions**
+   - Used for defining short functions. The code uses arrow functions for concise function expressions, such as `const loadingSpin = () => {...}` , `const showImage = (image) => {...}` etc. 
+   - **Example**:
+     ```javascript
+     const loadingSpin = () => {
+         // Function body
+     };
+     ```
 
 - **Template Literals**: 
-   - Template literals are employed for string interpolation, allowing for easier multi-line strings and dynamic content. For example:
+   - Template literals are employed for string interpolation, allowing for easier multi-line strings and dynamic content.
+    
+    - **Example**:
      ```javascript
      detailContainer.innerHTML = `
          <h2 class="font-bold text-xl">${petData.pet_name}</h2>
@@ -39,10 +48,16 @@ The Pet Adoption Platform is a web application designed to help users find pets 
      ```
 
 - **Destructuring Assignment**: 
-   - Destructuring is used for extracting values from objects or arrays. For instance, `const { pet_name, breed, gender } = petData;` allows for direct access to the properties of `petData`.
+   - The destructuring assignment is an expression that makes it easy to extract values from arrays, or properties from objects, into distinct variables.
+   
+  - **Example**:  Array Destructuring
+     ```javascript
+     const [firstSentence, ...remainingSentences] = sentenceArray;
+     ```
 
 - **Promises with `async/await`**: 
-   - The code makes asynchronous calls to fetch data using `async/await`, which makes the asynchronous code easier to read and maintain. For example:
+   - The code makes asynchronous calls to fetch data using `async/await`, which makes the asynchronous code easier to read and maintain.
+   - **Example**: 
      ```javascript
      const loadDetails = async (petId) => {
          const res = await fetch(url);
@@ -53,9 +68,43 @@ The Pet Adoption Platform is a web application designed to help users find pets 
 
 - **`let` and `const` Declarations**: 
    - The code uses `const` for constants and `let` for variables that may change, promoting block scoping and reducing errors compared to `var`.
+   - **Example**: 
+   ```javascript
+   let countDownValue = 3;
+   const detailContainer = document.getElementById("modal-content");
+   ```
+  
+- **String.endsWith()**:
+    - The endsWith() method returns true if a string ends with a specified value, otherwise false. 
 
-- **Array Methods**: 
-    - Methods like `map()`and `forEach()` are frequently used to manipulate arrays in a functional programming style, contributing to cleaner and more expressive code.
+    - **Example**: 
+    ```javascript  
+    detailContainer.innerHTML += `<li class="text-sm md:text-base mb-0.5">${sentence.endsWith('.') ? sentence : sentence + '.'}</li>`;
+     ```   
+- **for..of Loop**
+   - Used for iterating over iterable objects, such as arrays or strings, in a more readable way.
+   - **Example**:
+     ```javascript
+     for(let b of btns){
+      b.parentElement.classList.remove("active"); 
+     }
+     ```   
+
+- **Spread (...) Operator**
+   - Expands an iterable into more elements.
+   - **Example**:
+     ```javascript
+     const [firstSentence, ...remainingSentences] = sentenceArray;
+     ```
+
+- **Array forEach() Method**
+   - Used for iterating over arrays efficiently.
+   - **Example**:
+     ```javascript
+     remainingSentences.forEach(sentence => {
+         detailContainer.innerHTML += `<li class="text-sm md:text-base mb-0.5">${sentence.endsWith('.') ? sentence : sentence + '.'}</li>`;
+     });
+     ```
 
 These features enhance readability, maintainability, and efficiency in modern JavaScript development.
 
