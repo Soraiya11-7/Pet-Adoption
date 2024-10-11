@@ -112,7 +112,7 @@ These features enhance readability, maintainability, and efficiency in modern Ja
 
 
 ## **Live Link**
-Check out the live project [https://teal-longma-156da6.netlify.app/](https://teal-longma-156da6.netlify.app/).
+Check out the live project [https://teal-longma-156da6.netlify.app/](https://teal-longma-156da6.netlify.app/)
 
 
 
