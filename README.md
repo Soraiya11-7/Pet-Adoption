@@ -4,6 +4,10 @@
 The Pet Adoption Platform is a web application designed to help users find pets for adoption based on different categories. The portal has a user-friendly layout that allows users to browse, filter, and adopt pets while also offering important information about each animal. It offers a seamless experience for users seeking their perfect companion, utilizing modern ES6 JavaScript features and responsive design for all devices.
 
 
+## **Live Link**
+Check out the live project [Pet-Adoption](https://pet-adoption6.netlify.app/)
+
+
 ## **Key Features**
 
 - **Immediate Category Overview**: When the web page is accessed, all category cards are fetched from the API and displayed after a 2-second loading spinner, providing users with a comprehensive view of categories.
@@ -110,9 +114,6 @@ These features enhance readability, maintainability, and efficiency in modern Ja
 
 
 
-
-## **Live Link**
-Check out the live project [Live Demo](https://teal-longma-156da6.netlify.app/)
 
 
 
