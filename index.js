@@ -184,7 +184,7 @@ const loadCategoryCardBasedOnId = (id , categoryName) =>{
     removeActiveClass();
     const activeBtn = document.getElementById(`btn-${id}`);
     activeBtn.parentElement.classList.add("active");
-    activeBtn.parentElement.classList.remove("rounded-2xl",'border','border-[#0E7A8126]');
+    activeBtn.parentElement.classList.remove("rounded-2xl",'border','border-[#0E7A8126]','hover:border-[#0E7A81]');
 
     loadingSpin();
 
@@ -243,7 +243,7 @@ const displayCategoriesData = (data) =>{
     data.forEach(element => {
         const card = document.createElement("div");
         card.classList = "card card-compact";
-        card.classList.add('border', 'border-[#1313131A]','rounded-xl', 'p-3');
+        card.classList.add('border', 'border-[#1313131A]','rounded-xl', 'p-3', 'hover:border-[#0E7A81]');
 
         card.innerHTML = 
         `
@@ -338,7 +338,7 @@ const DisplayCategories = (categories) =>{
 
     categories.forEach(element => {
         const btnContainer = document.createElement("div");
-        btnContainer.classList.add('w-full','rounded-2xl', 'border','border-[#0E7A8126]','grid','justify-center','items-center');
+        btnContainer.classList.add('w-full','rounded-2xl', 'border','border-[#0E7A8126]','grid','justify-center', 'hover:bg-[#0E7A81]','hover:text-white','items-center');
         btnContainer.id = 'category-btn-container';
 
         if(element.id === 4){ 

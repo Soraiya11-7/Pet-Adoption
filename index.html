@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8" data-theme="light">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignment-6</title>
-
+    <title>Pet Adoption</title>
+     
+     <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./images/logo.webp">
+    
      <!-- Google Font cdn -->
      <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,10 +108,10 @@
            <div class="flex flex-col items-center justify-center">
             <div class="text-center mb-10 lg:mb-24">
              <h3 class="text-base md:text-xl lg:text-2xl font-bold mb-6 text-[#131313] text-opacity-[60%]">Bringing Families Together ❤️‍🔥</h3>
-              <h1 class="mb-4 lg:mb-8 text-xl md:text-3xl lg:text-5xl font-extrabold w-full lg:w-[90%] mx-auto text-[#131313]">Your Path to Adoption <br> Starts Here</h1>
+              <h1 class="mb-4 lg:mb-8 text-xl md:text-3xl lg:text-5xl font-extrabold w-full lg:w-[90%] mx-auto text-[#131313]">Your Path to <span class="text-[#0E7A81]">Adoption</span>  <br> Starts Here</h1>
               <p class=" mb-5 lg:mb-8 text-sm lg:text-base w-[90%] md:w-[72%] lg:w-[80%] mx-auto text-[#494949]">Begin your adoption journey with expert guidance and heartfelt support.</p>
               <div>
-                <a href="#main"><button class="px-6 py-3 md:px-8 md:py-4 bg-[#0E7A81] rounded-xl text-white font-bold text-base lg:text-xl mb-12">View More</button></a>
+                <a href="#main"><button class="px-6 py-3 md:px-8 md:py-4 bg-[#0E7A81] hover:bg-white hover:text-black hover:border-2 hover:border-[#0E7A81] rounded-xl text-white font-bold text-base lg:text-xl mb-12">View More</button></a>
             </div>
               <div class="w-[75%] mx-auto">
                 <img class="mx-auto" src="./images/pet.webp" alt="">
@@ -138,14 +141,17 @@
                 <h3 class="text-base md:text-2xl font-black text-center">Best Deal For you</h3>
             </div>
             <div>
-                <button id="sort-by-price" class="px-4 py-3 md:px-8 md:py-4 bg-[#0E7A81] rounded-xl text-white font-bold text-xs md:text-xl">Sort by Price</button>
+                <button id="sort-by-price" class="px-4 py-3 md:px-8 md:py-4 bg-[#0E7A81] hover:bg-white hover:text-black hover:border-2 hover:border-[#0E7A81] rounded-xl text-white font-bold text-xs md:text-xl">Sort by Price</button>
             </div>
 
          </div>
 
          <!-- loading............................. -->
          <div id="loading" class="hidden w-full h-[200px] flex items-center justify-center">
-            <span class="loading loading-bars loading-lg"></span>
+            <!-- <span class="loading loading-bars loading-lg"></span> -->
+             <!-- <div class="relative w-10 h-10"><div class="absolute w-full h-full rounded-full border-2 border-[#0E7A81] animate-ping opacity-75"></div><div class="absolute w-6 h-6 top-2 left-2 rounded-full border-2 border-[#0E7A81] animate-ping opacity-50" style="animation-delay:0.4s"></div><div class="relative rounded-full h-full w-full border-2 border-[#0E7A81]"></div></div> -->
+
+             <svg class="w-8 h-8 text-[#0E7A81] animate-spin" viewBox="0 0 24 24" fill="currentColor"><path d="M12,23a9.63,9.63,0,0,1-8-9.5,9.51,9.51,0,0,1,6.79-9.1A1.66,1.66,0,0,0,12,2.81h0a1.67,1.67,0,0,0-1.94-1.64A11,11,0,0,0,12,23Z"/></svg>
          </div>
         
          <!-- Animal Content............. -->
@@ -239,7 +245,7 @@
             <!-- <div class="w-full bg-[#FFFFFF0D] rounded-xl "> -->
               <input class="font-inter mb-4 text-xs lg:text-base font-normal text-[#FFFFFF99] rounded-xl bg-[#FFFFFF0D] px-3.5 py-3.5 w-full " type="text" name="" id="" placeholder="Enter your email">
             <!-- </div> -->
-            <div class="w-full flex justify-center items-center bg-[#0E7A81] rounded-xl px-6 py-3.5">
+            <div class="w-full flex justify-center items-center bg-[#0E7A81] hover:bg-white hover:text-black hover:border-2 hover:border-[#0E7A81] rounded-xl px-6 py-3.5">
               <button class="text-sm lg:text-xl font-bold">Subscribe</button>
             </div>
           
